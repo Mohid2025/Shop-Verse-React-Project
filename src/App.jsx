@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import Layout from './components/Layout'; // Import the Layout component
+import HomePage from './pages/Home'; // Example page component
+import ProductsPage from './pages/Products';
+import CartPage from './pages/Cart';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      {/* 3. The Layout component wraps the content that REMAINS CONSTANT (Header/Footer) */}
+      <Layout>
+        {/* 4. Routes define the areas that CHANGE based on the URL */}
+        <Routes>
+          {/* Define a route for each page */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          
+          {/* Optional: Add a 404/Not Found route */}
+          <Route path="*" element={<h1>404: Page Not Found</h1>} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
